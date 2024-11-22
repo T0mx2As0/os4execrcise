@@ -1,2 +1,4 @@
 user: "vagrant"
 haproxy_volume: "{{ path_volume }}/haproxy"
+
+cert: "{{ path_volume }}/haproxy/certs/"

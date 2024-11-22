@@ -9,11 +9,23 @@
     recurse: true
     mode: '0755'
 
+- name: Create directory for Haproxy certificate
+  file:
+    path: "{{cert}}"
+    state: directory
+    recurse: true
+    mode: '0755'
+
 - name: Copy haproxy.cfg
   ansible.builtin.template:
     src: template/haproxy.cfg
     dest: "{{haproxy_volume}}"
     remote_src: false
+
+- name: Copy cert directory inside VM
+  copy:
+    src: ../certs/
+    dest: "{{cert}}"
 
 - name: Pull Haproxy image 
   containers.podman.podman_image:
@@ -34,5 +46,6 @@
     restart_policy: always
     volumes:
       - "{{haproxy_volume}}/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:z"
+      - "{{cert}}:/etc/haproxy/cert/:z"
     ports:
-      - "8080:8080"
+      - "8443:8443"
