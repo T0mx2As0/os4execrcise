@@ -1,0 +1,38 @@
+---
+- name: Include variables
+  include_vars: "../../../inventory/vars.yml"
+
+- name: Create directory for Haproxy volume
+  file:
+    path: "{{haproxy_volume}}"
+    state: directory
+    recurse: true
+    mode: '0755'
+
+- name: Copy haproxy.cfg
+  ansible.builtin.template:
+    src: template/haproxy.cfg
+    dest: "{{haproxy_volume}}"
+    remote_src: false
+
+- name: Pull Haproxy image 
+  containers.podman.podman_image:
+    name: docker.io/haproxy:latest
+    state: present
+    force: true
+
+- name: Remove old Haproxy container
+  containers.podman.podman_container:
+    name: haproxy
+    state: absent
+
+- name: Run Haproxy container
+  containers.podman.podman_container:
+    name: haproxy
+    image: docker.io/haproxy:latest
+    state: started
+    restart_policy: always
+    volumes:
+      - "{{haproxy_volume}}/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:z"
+    ports:
+      - "8080:8080"

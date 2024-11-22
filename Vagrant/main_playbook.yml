@@ -1,0 +1,19 @@
+---
+- name: main playbook
+  gather_facts: false
+  become: true 
+  hosts: all_hosts
+  roles:
+    - sou_podman
+
+- name: Execute Haproxy role only on haproxy node
+  become: true
+  hosts: monitor_grp
+  roles:
+      - monitor
+
+- name: Execute Haproxy role only on haproxy node
+  become: true
+  hosts: haproxy_grp
+  roles:
+      - haproxy

@@ -1,0 +1,41 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+
+Vagrant.configure("2") do |config|
+  nodes= [
+    {
+      :hostname => "soufe1",
+      :ip => "192.168.50.100"
+    },
+    {
+      :hostname => "soube2",
+      :ip => "192.168.50.200"
+    }
+  ]
+  nodes.each do |servers|
+    config.vm.define servers[:hostname] do |node|
+      node.vm.box = "almalinux/9"
+      node.vm.hostname = servers[:hostname]
+      node.vm.network "private_network", ip: servers[:ip]
+
+      node.vm.provider "vmware_fusion" do |vmf|
+        vmf.memory = 1024
+        vmf.cpus = 1
+      end
+      node.vm.provision "ansible" do |ansible|
+        ansible.playbook = "main_playbook.yml"
+#        ansible.verbose = "vvv"
+        ansible.groups = {
+          "haproxy_grp" => ["soufe1"],
+          "monitor_grp" => ["soube2"],
+          "all_hosts:children" => ["haproxy_grp", "monitor_grp"],
+      }
+      end  
+    end
+  end
+end

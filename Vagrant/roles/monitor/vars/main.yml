@@ -1,0 +1,8 @@
+user: "vagrant"
+grafana_volume_conf: "{{ path_volume }}/grafana/conf/"
+grafana_volume_data: "{{ path_volume }}/grafana/data/"
+
+prometheus_volume_conf: "{{ path_volume }}/prometheus/conf/"
+prometheus_volume_data: "{{ path_volume }}/prometheus/data/"
+
+prometheus_user_id: "65534"
