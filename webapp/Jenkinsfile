@@ -1,18 +1,3 @@
-def build (Map args) {
-        def defaults = [
-        registryUrl: "https://registry.hub.docker.com",
-        dockerfileDir: ".os4execrcise/webapp/app/",
-        image: test/os4exercise,
-        buildArgs: "",
-        tag: "${env.BUILD_ID}"   
-    ]
-    args = defaults + args
-
-    def nameimage = "${args.image}:${args.tag}"
-
-    docker.build (nameimage, "${args.buildArgs} ${args.dockerfileDir}")
-    return "$nameimage"
-}
 
 def push (Map args) {
         def defaults = [
@@ -35,13 +20,22 @@ pipeline {
 
     agent any
 
+    environment {
+        DOCKER_IMAGE_NAME = 't0mx2as0/modulo_form',
+        DOCKER_BUILD_TAG = "${env.BUILD_ID}",
+        DOCKER_DIR: ".os4execrcise/webapp/app/"
+    }
+
+    def nameimage = env.DOCKER_:IMAGE_NAME:env.DOCKER_BUILD_TAG
+    
     stages {
 
         stage ('Build image') {
             
             steps{
                 script { 
-                    build_image = build()
+                    docker.build (nameimage, env.DOCKER_IMAGE_NAME env.DOCKER_DIR)
+                    echo "image: ${nameimage}"
                 }
             }
 
