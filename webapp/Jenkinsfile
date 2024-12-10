@@ -4,7 +4,7 @@
 def build (Map args) {
         def defaults = [
         registryUrl: "https://registry.hub.docker.com",
-        dockerfileDir: "./webapp/app",
+        dockerfileDir: ".os4execrcise/webapp/app/",
         image: test/os4exercise
         buildArgs: "",
         tag: "${env.BUILD_ID}"   
