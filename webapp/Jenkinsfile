@@ -6,7 +6,7 @@ def build (Map args) {
         buildArgs: "",
         tag: "${env.BUILD_ID}"   
     ]
-    arg = defaults + args
+    args = defaults + args
 
     def nameimage = "${args.image}:${args.tag}"
 
