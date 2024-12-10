@@ -14,10 +14,9 @@ CMD ["app.py"]
 
 FROM builder as dev-envs
 
-RUN <<EOF
-apk update
-apk add git
-EOF
+RUN apk update
+RUN apk add git
+
 
 RUN <<EOF
 addgroup -S docker
