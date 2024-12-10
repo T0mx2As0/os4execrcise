@@ -23,7 +23,7 @@ pipeline {
     environment {
         DOCKER_IMAGE_NAME = "t0mx2as0/modulo_form"
         DOCKER_BUILD_TAG = "${env.BUILD_ID}"
-        DOCKER_DIR: ".os4execrcise/webapp/app/"
+        DOCKER_DIR = ".os4execrcise/webapp/app/"
     }
 
     def nameimage = "${env.DOCKER_IMAGE_NAME}:${env.DOCKER_BUILD_TAG}"
