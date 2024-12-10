@@ -43,7 +43,7 @@ pipeline {
         stage ('Push image') {
             steps{
                 script {
-                    push (image: build_image)
+                    push (image: nameimage)
                 }
             }
 
