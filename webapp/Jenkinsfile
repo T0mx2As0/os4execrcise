@@ -20,7 +20,7 @@ pipeline {
 
     agent any
     environment {
-        DOCKER_IMAGE_NAME = "t0mx2as0/modulo_form"
+        DOCKER_IMAGE_NAME = "t0mx2as0/os4exercise"
         DOCKER_BUILD_TAG = "${env.BUILD_ID}"
         DOCKER_DIR = "./webapp/app/"
     }
