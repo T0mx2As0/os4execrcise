@@ -26,7 +26,7 @@ pipeline {
         DOCKER_DIR: ".os4execrcise/webapp/app/"
     }
 
-    def nameimage = env.DOCKER_:IMAGE_NAME:env.DOCKER_BUILD_TAG
+    def nameimage = "env.DOCKER_:IMAGE_NAME":"env.DOCKER_BUILD_TAG"
     
     stages {
 
