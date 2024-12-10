@@ -1,2 +1,0 @@
-#path_volume: "/home/{{user}}/podman/Volumes"
-path_volume: "/var/lib/podman/Volumes"
