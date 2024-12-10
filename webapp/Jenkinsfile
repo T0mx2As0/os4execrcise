@@ -1,6 +1,3 @@
-## Pipeline jenkins for build and push images
-
-
 def build (Map args) {
         def defaults = [
         registryUrl: "https://registry.hub.docker.com",
