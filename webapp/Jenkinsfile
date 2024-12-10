@@ -41,7 +41,7 @@ pipeline {
             
             steps{
                 script { 
-                    def build_image = build
+                    def build_image = build()
                 }
             }
 
