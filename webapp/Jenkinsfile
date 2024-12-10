@@ -34,7 +34,7 @@ pipeline {
             
             steps{
                 script { 
-                    docker.build (nameimage, ${env.DOCKER_IMAGE_NAME} ${env.DOCKER_DIR})
+                    docker.build (nameimage, "${env.DOCKER_IMAGE_NAME} ${env.DOCKER_DIR}")
                     echo "image: ${nameimage}"
                 }
             }
