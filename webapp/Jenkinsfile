@@ -2,7 +2,7 @@
 def push (Map args) {
         def defaults = [
         registryUrl: "https://registry.hub.docker.com",
-        image: "",
+//        image: "",
         pushLatest: true
     ]
     args = defaults + args
@@ -43,7 +43,7 @@ pipeline {
         stage ('Push image') {
             steps{
                 script {
-                        push (image: env.IMAGENAME)
+                        push(image: env.IMAGENAME)
                         //docker.image(env.IMAGE_NAME).push()
                 }
             }
