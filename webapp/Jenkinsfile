@@ -43,8 +43,8 @@ pipeline {
         stage ('Push image') {
             steps{
                 script {
-                        push(image: env.IMAGENAME)
-                        //docker.image(env.IMAGE_NAME).push()
+                        //push(image: env.IMAGENAME)
+                        docker.image(env.IMAGE_NAME).push()
                 }
             }
 
