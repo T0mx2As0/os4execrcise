@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.4
-FROM --platform=linux/arm64 python:3.10-alpine AS builder
+FROM python:3.10-alpine AS builder
 
 WORKDIR /app
 
